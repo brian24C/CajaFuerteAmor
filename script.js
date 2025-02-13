@@ -1,5 +1,5 @@
 // Contraseña predefinida
-const CONTRASENA = "2812";
+const CONTRASENA = "28";
 
 // Variable para almacenar la contraseña ingresada
 let contrasenaIngresada = "";
@@ -68,34 +68,34 @@ function mostrarCarta() {
 
 // Función para actualizar el contador
 function actualizarContador() {
-    const fechaInicio = new Date('2015-10-31');
+    const fechaInicio = new Date('2024-04-28');
     const ahora = new Date();
-
+    
     let anos = ahora.getFullYear() - fechaInicio.getFullYear();
     let meses = ahora.getMonth() - fechaInicio.getMonth();
-    let dias = ahora.getDate() - fechaInicio.getDate();
-    let horas = ahora.getHours() - fechaInicio.getHours();
-    let minutos = ahora.getMinutes() - fechaInicio.getMinutes();
-    let segundos = ahora.getSeconds() - fechaInicio.getSeconds();
-
-    if (dias < 0) {
-        meses--;
-        const ultimoDiaMesAnterior = new Date(ahora.getFullYear(), ahora.getMonth(), 0).getDate();
-        dias += ultimoDiaMesAnterior;
-    }
-
+    // Ajustamos los meses y años si es necesario
     if (meses < 0) {
         anos--;
         meses += 12;
     }
-
-    if (anos < 0) anos = 0;
-    if (meses < 0) meses = 0;
-    if (dias < 0) dias = 0;
-    if (horas < 0) horas = 0;
-    if (minutos < 0) minutos = 0;
-    if (segundos < 0) segundos = 0;
-
+    
+    // Ajuste adicional para el día del mes
+    if (ahora.getDate() < fechaInicio.getDate()) {
+        meses--;
+        if (meses < 0) {
+            anos--;
+            meses += 12;
+        }
+    }
+    
+    // Para obtener el día del mes actual
+    let dias = ahora.getDate();
+    
+    // Calculamos las horas, minutos y segundos
+    const horas = ahora.getHours();
+    const minutos = ahora.getMinutes();
+    const segundos = ahora.getSeconds();
+    
     document.getElementById('anos').textContent = anos;
     document.getElementById('meses').textContent = meses;
     document.getElementById('dias').textContent = dias;
